@@ -66,13 +66,14 @@
         </nav>
     </header>
     <content>
-        <?php
+    <?php
+        $path=str_replace("../","",$_GET['file']);
 //validate 
        if(empty($_GET)) {
         include("include/home.php");
        }else {
-        $path = "include/".$_GET['file'];
-        include($path);
+        $src = "include/".$path;
+        include($src);
        }
         ?>
     </content>
