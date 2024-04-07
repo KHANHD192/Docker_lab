@@ -22,5 +22,6 @@ RUN chmod -R 777 /var/log/apache2/
 
 RUN chmod +x entrypoint.sh
 
-EXPOSE 80
+EXPOSE 81
 
+CMD ["apache2ctl", "-D", "FOREGROUND"]

@@ -1,18 +1,13 @@
 version: "3.9"
-
 services:
   web:
-    image: "test"
     build:
       context: .
       dockerfile: Dockerfile  
     ports:
       - "80:80"
     networks:
-      - web_network
-    command: ./entrypoint.sh
-    stdin_open: true
-    tty: true
+      - mynetwork
     cap_drop:
     - ALL
     cap_add:
@@ -25,7 +20,4 @@ services:
       - apparmor:unconfined
     volumes:
       - /var/run/docker.sock:/run/docker.sock
-
-networks:
-  web_network:
-    driver: bridge
+    
