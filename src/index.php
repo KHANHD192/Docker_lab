@@ -66,15 +66,49 @@
         </nav>
     </header>
     <content>
-    <?php
-        $path=str_replace("../","",$_GET['file']);
-//validate 
-       if(empty($_GET)) {
-        include("include/home.php");
-       }else {
-        $src = "include/".$path;
-        include($src);
-       }
+        <?php
+        // check empty 
+        // print_r(($_GET));
+        if(!empty($_GET["file"])){
+            $black_list= array(
+                "/etc/issue",
+                "/etc/passwd",
+                "/etc/shadow",
+                "/etc/group",
+                "/etc/hosts",
+                "/etc/motd",
+                "/proc/self/environ",
+                "/proc/version",
+                "/proc/cmdline",
+                "/proc/sched_debug",
+                "/proc/mounts",
+                "/proc/net/arp",
+                "/proc/net/route",
+                "/proc/net/tcp"
+            );
+        $path =str_replace("../","",$_GET['file']);
+        // echo $path;
+        foreach($black_list as $item){
+             if(stripos($path,$item) != FALSE){
+                echo "<h3>Hacking detected ! </h3>";
+                echo "
+                <div style='
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                '>
+                <img style='max-width: 300px; max-height: 600px;'src='https://cdn.xaluannews.com/images/news/Image/2021/04/02/46066908629012.img.jpg'>
+                </div>
+                ";
+                exit();
+             }
+        }
+           $src ="include/".$path;
+           include($src);
+        }else{
+            include('include/home.php');
+        }
+        
         ?>
     </content>
     <footer>
