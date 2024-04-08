@@ -87,7 +87,7 @@
                 "/proc/net/tcp"
             );
     
-        $path =$_GET['file'];
+     
         foreach($black_list as $item){
              if(stripos($path,$item) != FALSE){
                 echo "<h3>Hacking detected ! </h3>";
