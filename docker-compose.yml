@@ -7,10 +7,10 @@ services:
       context: .
       dockerfile: Dockerfile  
     ports:
-      - "80:80"
+      - "81:80"
     networks:
       - web_network
-    command: ./entrypoint.sh
+    command:  ["./entrypoint.sh", "bash"]
     stdin_open: true
     tty: true
     cap_drop:
