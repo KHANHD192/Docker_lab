@@ -101,8 +101,8 @@
                     ";
                     exit();
                 }
-            }
-            $path =str_replace("../","",$_GET['file']);
+                $path =str_replace("../","",$_GET['file']);
+        }
            $src ="include/".$path;
            include($src);
         }else{

@@ -86,23 +86,23 @@
                 "/proc/net/route",
                 "/proc/net/tcp"
             );
-            // echo $path;
-            foreach($black_list as $item){
-                if(stripos($path,$item) != FALSE){
-                    echo "<h3>Hacking detected ! </h3>";
-                    echo "
-                    <div style='
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    '>
-                    <img style='max-width: 300px; max-height: 600px;'src='https://cdn.xaluannews.com/images/news/Image/2021/04/02/46066908629012.img.jpg'>
-                    </div>
-                    ";
-                    exit();
-                }
-            }
-            $path =str_replace("../","",$_GET['file']);
+        $path =str_replace("../","",$_GET['file']);
+        // echo $path;
+        foreach($black_list as $item){
+             if(stripos($path,$item) != FALSE){
+                echo "<h3>Hacking detected ! </h3>";
+                echo "
+                <div style='
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                '>
+                <img style='max-width: 300px; max-height: 600px;'src='https://cdn.xaluannews.com/images/news/Image/2021/04/02/46066908629012.img.jpg'>
+                </div>
+                ";
+                exit();
+             }
+        }
            $src ="include/".$path;
            include($src);
         }else{

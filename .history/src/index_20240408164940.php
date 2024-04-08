@@ -67,48 +67,46 @@
     </header>
     <content>
         <?php
-        // check empty 
-        // print_r(($_GET));
-        if(!empty($_GET["file"])){
-            $black_list= array(
-                "/etc/issue",
-                "/etc/passwd",
-                "/etc/shadow",
-                "/etc/group",
-                "/etc/hosts",
-                "/etc/motd",
-                "/proc/self/environ",
-                "/proc/version",
-                "/proc/cmdline",
-                "/proc/sched_debug",
-                "/proc/mounts",
-                "/proc/net/arp",
-                "/proc/net/route",
-                "/proc/net/tcp"
-            );
-            // echo $path;
-            foreach($black_list as $item){
-                if(stripos($path,$item) != FALSE){
-                    echo "<h3>Hacking detected ! </h3>";
-                    echo "
-                    <div style='
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    '>
-                    <img style='max-width: 300px; max-height: 600px;'src='https://cdn.xaluannews.com/images/news/Image/2021/04/02/46066908629012.img.jpg'>
-                    </div>
-                    ";
-                    exit();
-                }
-            }
-            $path =str_replace("../","",$_GET['file']);
-           $src ="include/".$path;
-           include($src);
-        }else{
-            include('include/home.php');
-        }
         
+        // print_r($black_list);
+//validate 
+       if(empty($_GET['file'])) {
+        include("include/home.php");
+       }else {
+        // echo "haha";/
+        $black_list= array(
+            "/etc/issue",
+            "/etc/passwd",
+            "/etc/shadow",
+            "/etc/group",
+            "/etc/hosts",
+            "/etc/motd",
+            "/proc/[0-9]*/fd/[0-9]*",   
+            "/proc/self/environ",
+            "/proc/version",
+            "/proc/cmdline",
+            "/proc/sched_debug",
+            "/proc/mounts",
+            "/proc/net/arp",
+            "/proc/net/route",
+            "/proc/net/tcp"
+        );
+        $path=str_replace("../","",$_GET['file']);
+        echo $path;
+        echo "</br>";
+        
+        foreach($black_list as $item){
+            // echo $item;
+            echo stripos($path,$item);
+            exit();
+            // if(stripos($path,$item) >=0 ){
+            //     echo "<h3>Hacking detected !</h3>";
+            //     echo "</br>";
+            // }
+        }
+        $src = "include/".$path;
+        include($src);
+       } 
         ?>
     </content>
     <footer>
